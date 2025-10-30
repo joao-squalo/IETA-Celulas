@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CellController;
+use App\Livewire\Churches\ChurchCreate;
 use App\Livewire\Churches\ChurchList;
 use App\Livewire\Churches\ChurchShow;
 use App\Livewire\Settings\Appearance;
@@ -22,8 +23,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get("/selecionarCelula", [CellController::class, 'selectCell'])->name('cells.select');
     Route::redirect('settings', 'settings/profile');
 
-     Route::prefix('igrejas')->group(function () {
+    Route::prefix('igrejas')->group(function () {
         Route::get('/', ChurchList::class)->name('churches.index');
+        Route::get('/nova', ChurchCreate::class)->name('churches.new');
         Route::get('/{church}', ChurchShow::class)->name('churches.show');
     });
 
@@ -46,4 +48,4 @@ Route::middleware(['auth'])->group(function () {
         ->name('two-factor.show');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

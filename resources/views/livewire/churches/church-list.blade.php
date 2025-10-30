@@ -2,14 +2,14 @@
     <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
         <div class="flex items-center justify-between">
             <h1 class="text-2xl font-bold text-white">Igrejas</h1>
-            <x-red-btn-link :url="'#'" :text="'Criar Igreja'" />
+            <x-red-btn-link :url="route('churches.new')" :text="'Criar Igreja'" />
         </div>
 
          <div class="mt-10">
-                <div class="relative overflow-x-auto shadow-md rounded-lg">
+                <div class="relative overflow-x-auto">
                     <table class="w-full border-b border-white text-sm text-left rtl:text-right text-gray-400">
-                        <thead class="text-xs text-gray-700 uppercase bg-white">
-                            <tr>
+                        <thead class="text-xs text-white uppercase bg-red-950">
+                            <tr class=" border border-red-950">
                                 <th scope="col" class="px-6 py-3">
                                     Nome da Igreja
                                 </th>
@@ -23,7 +23,7 @@
                         </thead>
                         <tbody>
                             @foreach ($churches as $church)
-                                <tr class=" border-b border-white">
+                                <tr class="border border-red-950 bg-zinc-950">
                                     <th scope="row" class="px-6 py-4 font-medium text-white whitespace-nowrap">
                                         {{ $church->name }}
                                     </th>

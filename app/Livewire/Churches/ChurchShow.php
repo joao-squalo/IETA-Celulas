@@ -10,8 +10,13 @@ class ChurchShow extends Component
 {
     public Church $church;
 
-    #[Validate('required')] 
+    #[Validate('required',as: 'Nome da Igreja')] 
     public $churchName;
+
+    #[Validate('required|email',as: 'Email')] 
+    public $userMail;
+
+    public bool $isOpen = false;
 
     public function mount(Church $church)
     {
@@ -30,5 +35,19 @@ class ChurchShow extends Component
         $church->save();
 
         return redirect()->route('churches.index');
+    }
+
+    public function addAdmin(){
+
+    }
+
+     public function openModal()
+    {
+        $this->isOpen = true;
+    }
+
+    public function closeModal()
+    {
+        $this->isOpen = false;
     }
 }
