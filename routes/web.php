@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\CellController;
+use App\Livewire\Churches\ChurchList;
+use App\Livewire\Churches\ChurchShow;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -19,6 +21,14 @@ Route::view('dashboard', 'dashboard')
 Route::middleware(['auth'])->group(function () {
     Route::get("/selecionarCelula", [CellController::class, 'selectCell'])->name('cells.select');
     Route::redirect('settings', 'settings/profile');
+
+     Route::prefix('igrejas')->group(function () {
+        Route::get('/', ChurchList::class)->name('churches.index');
+        Route::get('/{church}', ChurchShow::class)->name('churches.show');
+    });
+
+
+
 
     Route::get('settings/profile', Profile::class)->name('settings.profile');
     Route::get('settings/password', Password::class)->name('settings.password');

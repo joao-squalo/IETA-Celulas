@@ -22,8 +22,10 @@
                     :current="request()->routeIs('dashboard')" wire:navigate>Início</flux:navlist.item>
             </flux:navlist.group>
             <flux:navlist.group class="grid mt-4">
-                <flux:navlist.item icon="building-library" :href="route('dashboard')"
-                    :current="request()->routeIs('dashboard')" wire:navigate>Igrejas</flux:navlist.item>
+                @if (Auth::user()->is_admin)
+                    <flux:navlist.item icon="building-library" :href="route('churches.index')"
+                        :current="request()->routeIs('churches.*')" wire:navigate>Igrejas</flux:navlist.item>
+                @endif
                 <flux:navlist.item icon="users" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
                     wire:navigate>Usuários</flux:navlist.item>
                 <flux:navlist.item icon="queue-list" :href="route('dashboard')"
