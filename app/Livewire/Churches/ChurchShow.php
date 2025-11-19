@@ -2,18 +2,19 @@
 
 namespace App\Livewire\Churches;
 
-use Livewire\Attributes\Validate; 
+use Livewire\Attributes\Validate;
 use App\Models\Church;
+use App\Models\User;
 use Livewire\Component;
 
 class ChurchShow extends Component
 {
     public Church $church;
 
-    #[Validate('required',as: 'Nome da Igreja')] 
+    #[Validate('required', as: 'Nome da Igreja')]
     public $churchName;
 
-    #[Validate('required|email',as: 'Email')] 
+    #[Validate('required|email', as: 'Email')]
     public $userMail;
 
     public bool $isOpen = false;
@@ -29,7 +30,8 @@ class ChurchShow extends Component
         return view('livewire.churches.church-show');
     }
 
-    public function save(){
+    public function save()
+    {
         $church = $this->church;
         $church->name = $this->churchName;
         $church->save();
@@ -37,17 +39,36 @@ class ChurchShow extends Component
         return redirect()->route('churches.index');
     }
 
-    public function addAdmin(){
+    public function addAdmin()
+    {
+        $user = User::where("email", $this->userMail)->first();
 
+        if ($user == null) {
+            $this->addError('userMail', 'Usuário não encontrado.');
+            return;
+        }
+
+        $user->churches()->syncWithoutDetaching($this->church);
+        $this->userMail = '';
+        $this->isOpen = false;
     }
 
-     public function openModal()
+    public function removeAdmin($id)
+    {
+        $user = User::find($id);
+
+        $user->churches()->detach($this->church);
+    }
+
+    public function openModal()
     {
         $this->isOpen = true;
     }
 
     public function closeModal()
     {
+        $this->userMail = '';
+        $this->resetErrorBag();
         $this->isOpen = false;
     }
 }

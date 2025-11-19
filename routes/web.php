@@ -4,10 +4,16 @@ use App\Http\Controllers\CellController;
 use App\Livewire\Churches\ChurchCreate;
 use App\Livewire\Churches\ChurchList;
 use App\Livewire\Churches\ChurchShow;
+use App\Livewire\Networks\NetworkCreate;
+use App\Livewire\Networks\NetworkList;
+use App\Livewire\Networks\NetworkShow;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use App\Livewire\Settings\TwoFactor;
+use App\Livewire\Users\UserCreate;
+use App\Livewire\Users\UserList;
+use App\Livewire\Users\UserShow;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 
@@ -27,6 +33,18 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', ChurchList::class)->name('churches.index');
         Route::get('/nova', ChurchCreate::class)->name('churches.new');
         Route::get('/{church}', ChurchShow::class)->name('churches.show');
+    });
+
+      Route::prefix('usuarios')->group(function () {
+        Route::get('/', UserList::class)->name('users.index');
+        Route::get('/novo', UserCreate::class)->name('users.new');
+        Route::get('/{user}', UserShow::class)->name('users.show');
+    });
+
+        Route::prefix('redes')->group(function () {
+        Route::get('/', NetworkList::class)->name('networks.index');
+        Route::get('/novo', NetworkCreate::class)->name('networks.new');
+        Route::get('/{network}', NetworkShow::class)->name('networks.show');
     });
 
 

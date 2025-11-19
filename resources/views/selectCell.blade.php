@@ -16,7 +16,7 @@
                 
                 <span class="text-center text-white">Selecione a célula</span>
                     <a href="#"
-                        class="text-white text-xl py-5 font-30 bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 rounded-lg px-5 py-2.5 focus:outline-none">
+                        class="text-white text-xl py-5 font-30 bg-[#FF0000] hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 rounded-lg px-5 py-2.5 focus:outline-none">
                         <strong>CELULA</strong><br />
                         <small>REDE VERMELHA</small>
                     </a>

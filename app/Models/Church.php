@@ -15,4 +15,9 @@ class Church extends Model
     {
         return $this->belongsToMany(User::class)->withTimestamps();
     }
+
+    public function networks()
+    {
+        return $this->hasMany(Network::class);
+    }
 }

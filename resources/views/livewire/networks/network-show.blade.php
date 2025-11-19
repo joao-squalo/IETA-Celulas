@@ -2,36 +2,55 @@
     <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
 
         <div class="flex items-center justify-between">
-            <h1 class="text-2xl font-bold text-white">{{ $churchName }}</h1>
-            <x-red-btn-link :url="route('churches.index')" :text="'Voltar'" />
+            <h1 class="text-2xl font-bold text-white">{{ $network->name }}</h1>
+            <x-red-btn-link :url="route('networks.index')" :text="'Voltar'" />
         </div>
-
-        <div class="my-10 flex justify-center">
+        <div class="mt-10 mb-30">
             <form wire:submit="save">
-                <div class="w-full w-md">
-                    <div class="mb-5">
-                        <label for="name" class="block mb-2 text-sm font-medium text-white">Nome da Igreja</label>
-                        <input wire:model.live="churchName" type="text" id="name"
+                <div class="flex h-full w-100 items-start m-auto flex-col justify-center">
+                    <div class="mb-5 w-full">
+                        <label for="name" class="block mb-2 text-sm font-medium text-white">Nome</label>
+                        <select id="churchID" wire:model="churchID" required
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <option value="">Selecione uma igreja</option>
+                            @foreach ($churches as $church)
+                                <option value="{{ $church->id }}">{{ $church->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-5 w-full">
+                        <label for="name" class="block mb-2 text-sm font-medium text-white">Nome</label>
+                        <input wire:model.live="name" type="text" id="name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 "
                             required />
-                        @error('churchName')
+                        @error('name')
+                            <span class="text-red-900">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="mb-5  w-30">
+                        <label for="name" class="block mb-2 text-sm font-medium text-white">Cor</label>
+                        <input wire:model.live="color" type="color" id="color" class="w-10 h-10 w-full"
+                            required />
+                        @error('color')
                             <span class="text-red-900">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
-                <div class="flex justify-end">
+                <div class="w-100 m-auto mt-10 flex flex-col justify-between">
                     <button type="submit"
-                        class="text-white bg-green-700 cursor-pointer transition duration-300 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center">Salvar</button>
+                        class="text-white bg-green-700 cursor-pointer transition duration-300 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Salvar</button>
+                    <button
+                        class="mt-5 text-white bg-red-700 cursor-pointer transition duration-300 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Excluir</button>
+
                 </div>
             </form>
         </div>
-
         <hr />
         <div class="flex items-center justify-between">
-            <h1 class="text-2xl font-bold text-white">Administradores da Igreja</h1>
+            <h1 class="text-2xl font-bold text-white">Líderes da Rede</h1>
             <button wire:click="openModal"
                 class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none cursor-pointer">Vincular
-                administrador</button>
+                lider</button>
 
         </div>
         <div class="mt-10">
@@ -54,7 +73,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($church->users as $user)
+                        @forelse ($network->users as $user)
                             <tr class="border border-red-950 bg-zinc-950">
                                 <th scope="row" class="px-6 py-4 font-medium text-white whitespace-nowrap">
                                     {{ $user->name }}
@@ -66,7 +85,8 @@
                                     {{ $user->pivot->created_at->format('d/m/Y H:i') }}
                                 </td>
                                 <td class="px-6 py-4 text-end">
-                                    <a wire:click="removeAdmin({{ $user->id }})" class="cursor-pointer text-red-400 hover:underline">Desvincular</a>
+                                    <a wire:click="remove({{ $user->id }})"
+                                        class="cursor-pointer text-red-400 hover:underline">Desvincular</a>
                                 </td>
                             </tr>
                         @empty
@@ -89,8 +109,8 @@
 
             <!-- Conteúdo do modal -->
             <div class="bg-white rounded-lg shadow-lg p-6 z-10 w-96 relative">
-                <h2 class="text-xl text-red-700 font-bold mb-4">Vincular Administrador</h2>
-                <form wire:submit="addAdmin">
+                <h2 class="text-xl text-red-700 font-bold mb-4">Vincular Líder</h2>
+                <form wire:submit="add">
                     <div>
                         <div>
                             <label for="name" class="block mb-2 text-sm font-medium text-black">E-mail</label>

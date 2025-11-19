@@ -26,10 +26,10 @@
                     <flux:navlist.item icon="building-library" :href="route('churches.index')"
                         :current="request()->routeIs('churches.*')" wire:navigate>Igrejas</flux:navlist.item>
                 @endif
-                <flux:navlist.item icon="users" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
+                <flux:navlist.item icon="users" :href="route('users.index')" :current="request()->routeIs('users.*')"
                     wire:navigate>Usuários</flux:navlist.item>
-                <flux:navlist.item icon="queue-list" :href="route('dashboard')"
-                    :current="request()->routeIs('dashboard')" wire:navigate>Redes</flux:navlist.item>
+                <flux:navlist.item icon="queue-list" :href="route('networks.index')"
+                    :current="request()->routeIs('networks.*')" wire:navigate>Redes</flux:navlist.item>
                 <flux:navlist.item icon="home" :href="route('dashboard')"
                     :current="request()->routeIs('dashboard')" wire:navigate>Células</flux:navlist.item>
 
