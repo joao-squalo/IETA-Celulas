@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Settings;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password as PasswordRule;
@@ -34,6 +35,7 @@ class Password extends Component
 
         Auth::user()->update([
             'password' => Hash::make($validated['password']),
+            'email_verified_at' => Carbon::now()
         ]);
 
         $this->reset('current_password', 'password', 'password_confirmation');

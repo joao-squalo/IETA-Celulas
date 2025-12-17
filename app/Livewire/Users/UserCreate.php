@@ -2,7 +2,9 @@
 
 namespace App\Livewire\Users;
 
+use App\Mail\UserInviteMail;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\Attributes\Validate;
@@ -22,12 +24,16 @@ class UserCreate extends Component
 
     public function save()
     {
-        $church = User::create([
+        $password = random_int(100000, 999999);
+        $user = new User([
             "name" => $this->name,
             "email" => $this->email,
-            "password" => bcrypt(Str::random(5))
+            "password" => bcrypt($password)
         ]);
 
+        $user->save();
+
+        Mail::to($user->email)->send(new UserInviteMail($user, $password));
         return redirect()->route('users.index');
     }
 }

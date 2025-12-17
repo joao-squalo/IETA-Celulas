@@ -52,7 +52,11 @@ class Login extends Component
         RateLimiter::clear($this->throttleKey());
         Session::regenerate();
 
-        $this->redirectIntended(default: route('cells.select', absolute: false), navigate: true);
+        if ($user->email_verified_at == null) {
+            $this->redirectIntended(default: route('settings.password', absolute: false), navigate: true);
+        } else {
+            $this->redirectIntended(default: route('cells.select', absolute: false), navigate: true);
+        }
     }
 
     /**
@@ -99,6 +103,6 @@ class Login extends Component
      */
     protected function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->email).'|'.request()->ip());
+        return Str::transliterate(Str::lower($this->email) . '|' . request()->ip());
     }
 }
