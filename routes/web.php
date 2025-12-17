@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\CellController;
+use App\Livewire\Cells\CellCreate;
+use App\Livewire\Cells\CellList;
+use App\Livewire\Cells\CellShow;
+use App\Livewire\Cells\CellsList;
 use App\Livewire\Churches\ChurchCreate;
 use App\Livewire\Churches\ChurchList;
 use App\Livewire\Churches\ChurchShow;
@@ -35,16 +39,22 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/{church}', ChurchShow::class)->name('churches.show');
     });
 
-      Route::prefix('usuarios')->group(function () {
+    Route::prefix('usuarios')->group(function () {
         Route::get('/', UserList::class)->name('users.index');
         Route::get('/novo', UserCreate::class)->name('users.new');
         Route::get('/{user}', UserShow::class)->name('users.show');
     });
 
-        Route::prefix('redes')->group(function () {
+    Route::prefix('redes')->group(function () {
         Route::get('/', NetworkList::class)->name('networks.index');
         Route::get('/novo', NetworkCreate::class)->name('networks.new');
         Route::get('/{network}', NetworkShow::class)->name('networks.show');
+    });
+
+    Route::prefix('celulas')->group(function () {
+        Route::get('/', CellList::class)->name('cells.index');
+        Route::get('/novo', CellCreate::class)->name('cells.new');
+        Route::get('/{cell}', CellShow::class)->name('cells.show');
     });
 
 

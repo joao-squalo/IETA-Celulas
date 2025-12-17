@@ -71,4 +71,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Network::class)->withTimestamps();
     }
+
+    public function cells()
+    {
+        return $this->belongsToMany(Cell::class)->withTimestamps();
+    }
 }

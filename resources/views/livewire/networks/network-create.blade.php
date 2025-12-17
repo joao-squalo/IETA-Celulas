@@ -10,7 +10,7 @@
             <form wire:submit="save">
                 <div class="flex h-full w-full items-center justify-center">
                     <div class="mb-5 mx-5 w-full">
-                        <label for="name" class="block mb-2 text-sm font-medium text-white">Nome</label>
+                        <label for="name" class="block mb-2 text-sm font-medium text-white">Igreja</label>
                         <select id="churchID" wire:model="churchID" required
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                             <option value="">Selecione uma igreja</option>
