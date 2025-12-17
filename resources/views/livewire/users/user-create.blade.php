@@ -3,7 +3,7 @@
 
         <div class="flex items-center justify-between">
             <h1 class="text-2xl font-bold text-white">Cadastrar novo Usuário</h1>
-            <x-red-btn-link :url="route('churches.index')" :text="'Voltar'" />
+            <x-red-btn-link :url="route('users.index')" :text="'Voltar'" />
         </div>
 
         <div class="mt-10">
