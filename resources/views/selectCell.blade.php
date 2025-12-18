@@ -24,7 +24,7 @@
                     </a>
                 @endforeach
 
-                @if (Auth::user()->is_admin || Auth::user()->networks()->exists() || Auth::user()->cells()->exists())
+                @if (Auth::user()->is_admin || Auth::user()->churches()->exists() || Auth::user()->networks()->exists() || Auth::user()->cells()->exists())
                     <a href="{{ route('dashboard') }}"
                         class="text-red-700 mt-10 text-xl py-5 font-30 bg-slate-200 hover:bg-slate-300 focus:ring-4 focus:ring-red-300 rounded-lg px-5 py-2.5 focus:outline-none">
                         <strong>Painel Administrador</strong>
