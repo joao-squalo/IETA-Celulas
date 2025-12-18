@@ -36,8 +36,8 @@
             </flux:navlist.group>
 
             <flux:navlist.group class="grid mt-4">
-                <flux:navlist.item icon="document-duplicate" :href="route('dashboard')"
-                    :current="request()->routeIs('dashboard')" wire:navigate>Registros</flux:navlist.item>
+                <flux:navlist.item icon="document-duplicate" :href="route('registers.index')"
+                    :current="request()->routeIs('registers.*')" wire:navigate>Registros</flux:navlist.item>
                 <flux:navlist.item icon="document-text" :href="route('dashboard')"
                     :current="request()->routeIs('dashboard')" wire:navigate>Relatórios</flux:navlist.item>
             </flux:navlist.group>
@@ -138,6 +138,8 @@
     {{ $slot }}
 
     @fluxScripts
+
+    @stack('scripts')
 </body>
 
 </html>

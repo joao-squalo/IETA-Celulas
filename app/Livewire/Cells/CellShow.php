@@ -38,7 +38,7 @@ class CellShow extends Component
     {
         return view('livewire.cells.cell-show');
     }
-     public function save()
+    public function save()
     {
         $cell = $this->cell;
         $cell->name = $this->name;
@@ -48,7 +48,7 @@ class CellShow extends Component
         return redirect()->route('cells.index');
     }
 
-     public function add()
+    public function add()
     {
         $user = User::where("email", $this->userMail)->first();
 

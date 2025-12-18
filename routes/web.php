@@ -11,6 +11,8 @@ use App\Livewire\Churches\ChurchShow;
 use App\Livewire\Networks\NetworkCreate;
 use App\Livewire\Networks\NetworkList;
 use App\Livewire\Networks\NetworkShow;
+use App\Livewire\Registers\RegisterList;
+use App\Livewire\Registers\RegisterShow;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -31,6 +33,8 @@ Route::view('dashboard', 'dashboard')
 
 Route::middleware(['auth'])->group(function () {
     Route::get("/selecionarCelula", [CellController::class, 'selectCell'])->name('cells.select');
+    Route::get("/novoRegistro/{cell}", [CellController::class, 'register'])->name('cells.register');
+    Route::post("/novoRegistro", [CellController::class, 'saveRegister'])->name('cells.saveRegister');
     Route::redirect('settings', 'settings/profile');
 
     Route::prefix('igrejas')->group(function () {
@@ -55,6 +59,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', CellList::class)->name('cells.index');
         Route::get('/novo', CellCreate::class)->name('cells.new');
         Route::get('/{cell}', CellShow::class)->name('cells.show');
+    });
+
+    Route::prefix('registros')->group(function () {
+        Route::get('/', RegisterList::class)->name('registers.index');
+        Route::get('/{register}', RegisterShow::class)->name('registers.show');
     });
 
 
