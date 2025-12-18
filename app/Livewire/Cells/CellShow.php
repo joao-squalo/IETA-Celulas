@@ -66,7 +66,7 @@ class CellShow extends Component
     {
         $user = User::find($id);
 
-        $user->cells()->detach($this->network);
+        $user->cells()->detach($this->cell);
     }
 
     public function openModal()

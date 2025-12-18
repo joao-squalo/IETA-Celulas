@@ -26,20 +26,29 @@
                     <flux:navlist.item icon="building-library" :href="route('churches.index')"
                         :current="request()->routeIs('churches.*')" wire:navigate>Igrejas</flux:navlist.item>
                 @endif
-                <flux:navlist.item icon="users" :href="route('users.index')" :current="request()->routeIs('users.*')"
-                    wire:navigate>Usuários</flux:navlist.item>
-                <flux:navlist.item icon="queue-list" :href="route('networks.index')"
-                    :current="request()->routeIs('networks.*')" wire:navigate>Redes</flux:navlist.item>
-                <flux:navlist.item icon="home" :href="route('cells.index')"
-                    :current="request()->routeIs('cells.*')" wire:navigate>Células</flux:navlist.item>
+
+                @if (Auth::user()->is_admin || Auth::user()->churches()->exists() || Auth::user()->networks()->exists())
+                    <flux:navlist.item icon="users" :href="route('users.index')"
+                        :current="request()->routeIs('users.*')" wire:navigate>Usuários</flux:navlist.item>
+                @endif
+
+                @if (Auth::user()->is_admin || Auth::user()->churches()->exists())
+                    <flux:navlist.item icon="queue-list" :href="route('networks.index')"
+                        :current="request()->routeIs('networks.*')" wire:navigate>Redes</flux:navlist.item>
+                @endif
+
+                @if (Auth::user()->is_admin || Auth::user()->churches()->exists() || Auth::user()->networks()->exists())
+                    <flux:navlist.item icon="home" :href="route('cells.index')"
+                        :current="request()->routeIs('cells.*')" wire:navigate>Células</flux:navlist.item>
+                @endif
 
             </flux:navlist.group>
 
             <flux:navlist.group class="grid mt-4">
                 <flux:navlist.item icon="document-duplicate" :href="route('registers.index')"
                     :current="request()->routeIs('registers.*')" wire:navigate>Registros</flux:navlist.item>
-                <flux:navlist.item icon="document-text" :href="route('dashboard')"
-                    :current="request()->routeIs('dashboard')" wire:navigate>Relatórios</flux:navlist.item>
+                {{-- <flux:navlist.item icon="document-text" :href="route('dashboard')"
+                    :current="request()->routeIs('dashboard')" wire:navigate>Relatórios</flux:navlist.item> --}}
             </flux:navlist.group>
         </flux:navlist>
 

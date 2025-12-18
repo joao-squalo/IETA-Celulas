@@ -13,8 +13,13 @@ class NetworkList extends Component
     {
         if (Auth::user()->is_admin)
             $this->networks = Network::all();
-        else
-            $this->networks = Auth::user()->networks;
+        else {
+            $this->networks = Network::whereIn(
+                'church_id',
+                Auth::user()->churches()->pluck('id')
+            )->get();
+        }
+
 
         return view('livewire.networks.network-list');
     }
