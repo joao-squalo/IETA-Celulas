@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('church_user', function (Blueprint $table) {
             $table->foreignId('church_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->boolean('isAdmin')->default(false);
             $table->timestamps();
         });
     }

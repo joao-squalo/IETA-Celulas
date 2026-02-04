@@ -5,6 +5,7 @@ namespace App\Livewire\Users;
 use App\Models\Network;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Livewire\Component;
 
 class UserList extends Component
@@ -13,30 +14,13 @@ class UserList extends Component
     public function render()
     {
         if (Auth::user()->is_admin) {
-            $this->users = User::all();
+            $this->users = User::all()->sortBy(fn($user) => Str::ascii($user->name))->values();
         } else {
             $churchesIds = Auth::user()->churches()->pluck('id');
-            $cellsIds = Auth::user()->cells()->pluck('id');
 
-            $networksFromCells = Auth::user()->cells()
-                ->distinct()
-                ->pluck('network_id');
-
-            $networksFromChurches = Network::whereIn('church_id', $churchesIds)
-                ->pluck('id');
-
-            $networksIds = $networksFromCells
-                ->merge($networksFromChurches)
-                ->unique()
-                ->values();
-
-            $this->users = User::whereHas('networks', function ($query) use ($networksIds) {
-                $query->whereIn('networks.id', $networksIds);
-            })->orWhereHas('churches', function ($query) use ($churchesIds) {
+            $this->users = User::WhereHas('churches', function ($query) use ($churchesIds) {
                 $query->whereIn('churches.id', $churchesIds);
-            })->orWhereHas('cells', function ($query) use ($cellsIds) {
-                $query->whereIn('cells.id', $cellsIds);
-            })->get();
+            })->get()->sortBy(fn($user) => Str::ascii($user->name))->values();
         }
 
         return view('livewire.users.user-list');

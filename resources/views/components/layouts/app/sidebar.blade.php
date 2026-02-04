@@ -27,17 +27,17 @@
                         :current="request()->routeIs('churches.*')" wire:navigate>Igrejas</flux:navlist.item>
                 @endif
 
-                @if (Auth::user()->is_admin || Auth::user()->churches()->exists() || Auth::user()->networks()->exists())
+                @if (Auth::user()->is_admin || Auth::user()->churches()->where('isAdmin', true)->exists() || Auth::user()->networks()->exists())
                     <flux:navlist.item icon="users" :href="route('users.index')"
                         :current="request()->routeIs('users.*')" wire:navigate>Usuários</flux:navlist.item>
                 @endif
 
-                @if (Auth::user()->is_admin || Auth::user()->churches()->exists())
+                @if (Auth::user()->is_admin || Auth::user()->churches()->where('isAdmin', true)->exists())
                     <flux:navlist.item icon="queue-list" :href="route('networks.index')"
                         :current="request()->routeIs('networks.*')" wire:navigate>Redes</flux:navlist.item>
                 @endif
 
-                @if (Auth::user()->is_admin || Auth::user()->churches()->exists() || Auth::user()->networks()->exists())
+                @if (Auth::user()->is_admin || Auth::user()->churches()->where('isAdmin', true)->exists() || Auth::user()->networks()->exists())
                     <flux:navlist.item icon="home" :href="route('cells.index')"
                         :current="request()->routeIs('cells.*')" wire:navigate>Células</flux:navlist.item>
                 @endif

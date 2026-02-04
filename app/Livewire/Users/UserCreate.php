@@ -4,6 +4,7 @@ namespace App\Livewire\Users;
 
 use App\Mail\UserInviteMail;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -32,6 +33,9 @@ class UserCreate extends Component
         ]);
 
         $user->save();
+
+        $churchesIds = Auth::user()->churches()->pluck('id');
+        $user->churches()->syncWithoutDetaching($churchesIds);
 
         Mail::to($user->email)->send(new UserInviteMail($user, $password));
         return redirect()->route('users.index');
