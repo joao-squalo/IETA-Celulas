@@ -16,17 +16,9 @@ class RegisterList extends Component
         if (Auth::user()->is_admin) {
             $this->registers = Register::all();
         } else {
-            $churchesIds = Auth::user()->churches()->pluck('id');
             $networksIds = Auth::user()->networks()->pluck('id');
 
-            $churchNetworks = Network::whereIn('church_id', $churchesIds)->pluck('id');
-
-            $allNetworkIds = $networksIds
-                ->merge($churchNetworks)
-                ->unique()
-                ->values();
-
-            $allCellsIds = Cell::whereIn('network_id', $allNetworkIds)->pluck('id')->merge(Auth::user()->cells()->pluck('id'))
+            $allCellsIds = Cell::whereIn('network_id', $networksIds)->pluck('id')->merge(Auth::user()->cells()->pluck('id'))
                 ->unique()
                 ->values();
 

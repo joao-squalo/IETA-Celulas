@@ -17,7 +17,7 @@ class CellList extends Component
             $this->cells = Cell::all()->sortBy(fn($cell) => mb_strtolower(Str::ascii($cell->name)))
                 ->values();
         } else {
-            $churchesIds = Auth::user()->churches()->pluck('id');
+            $churchesIds = Auth::user()->churches()->where("isAdmin", true)->pluck('id');
             $networksIds = Auth::user()->networks()->pluck('id');
 
             $churchNetworks = Network::whereIn('church_id', $churchesIds)->pluck('id');
