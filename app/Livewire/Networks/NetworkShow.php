@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Networks;
 
+use App\Models\Church;
 use App\Models\Network;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +31,10 @@ class NetworkShow extends Component
 
     public function mount(Network $network)
     {
-        $this->churches = Auth::user()->churches;
+        if (Auth::user()->is_admin)
+            $this->churches = Church::all();
+        else
+            $this->churches = Auth::user()->churches;
 
         $this->network = $network;
         $this->name = $network->name;
@@ -55,7 +59,7 @@ class NetworkShow extends Component
         return redirect()->route('networks.index');
     }
 
-     public function add()
+    public function add()
     {
         $user = User::where("email", $this->userMail)->first();
 
@@ -69,11 +73,12 @@ class NetworkShow extends Component
         $this->isOpen = false;
     }
 
-    public function remove($id)
+    public function remove()
     {
-        $user = User::find($id);
+        $this->network->cells()->delete();
+        $this->network->delete();
 
-        $user->networks()->detach($this->network);
+        return redirect()->route('networks.index');
     }
 
     public function openModal()

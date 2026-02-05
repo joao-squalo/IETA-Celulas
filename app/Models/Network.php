@@ -16,6 +16,10 @@ class Network extends Model
         return $this->belongsTo(Church::class);
     }
 
+      public function cells()
+    {
+        return $this->hasMany(Cell::class);
+    }
     public function users()
     {
         return $this->belongsToMany(User::class)->withTimestamps();

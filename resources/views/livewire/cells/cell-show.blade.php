@@ -30,7 +30,7 @@
                 <div class="w-100 m-auto mt-10 flex flex-col justify-between">
                     <button type="submit"
                         class="text-white bg-green-700 cursor-pointer transition duration-300 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Salvar</button>
-                    <button
+                    <button type="button" wire:click="remove"
                         class="mt-5 text-white bg-red-700 cursor-pointer transition duration-300 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Excluir</button>
 
                 </div>

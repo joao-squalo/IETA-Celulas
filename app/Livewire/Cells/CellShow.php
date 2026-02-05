@@ -3,6 +3,7 @@
 namespace App\Livewire\Cells;
 
 use App\Models\Cell;
+use App\Models\Network;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
@@ -27,7 +28,10 @@ class CellShow extends Component
 
     public function mount(Cell $cell)
     {
-        $this->networks = Auth::user()->networks;
+        if (Auth::user()->is_admin)
+            $this->networks = Network::all();
+        else
+            $this->networks = Auth::user()->networks;
 
         $this->cell = $cell;
         $this->name = $cell->name;
@@ -62,11 +66,11 @@ class CellShow extends Component
         $this->isOpen = false;
     }
 
-    public function remove($id)
+    public function remove()
     {
-        $user = User::find($id);
-
-        $user->cells()->detach($this->cell);
+        $cell = $this->cell;
+        $cell->delete();
+        return redirect()->route('cells.index');
     }
 
     public function openModal()
