@@ -26,6 +26,18 @@ class RegisterShow extends Component
     #[Validate(as: 'Nomes dos Visitantes Presentes')]
     public $nameVisitors;
 
+    #[Validate('required', as: 'Total de Batismos')]
+    public $totBaptism;
+
+    #[Validate(as: 'Nomes dos Batizados')]
+    public $nameBaptism;
+
+    #[Validate('required', as: 'Total de Conversões')]
+    public $totConversions;
+
+    #[Validate(as: 'Nomes dos Convertidos')]
+    public $nameConversions;
+
     #[Validate('required', as: 'Valor Arrecadado de Ofertas')]
     public $offer;
 
@@ -41,6 +53,11 @@ class RegisterShow extends Component
         $this->totVisitors = $register->totVisitors;
         $this->namePeople = $register->namePeople;
         $this->nameVisitors = $register->nameVisitors;
+        $this->totBaptism = $register->totBaptism;
+        $this->nameBaptism = $register->nameBaptism;
+        $this->totConversions = $register->totConversions;
+        $this->nameConversions = $register->nameConversions;
+
         $this->obs = $register->obs;
         $this->offer = number_format($register->offer, 2, ',', '.');
     }
@@ -59,6 +76,12 @@ class RegisterShow extends Component
         $register->totVisitors = $this->totVisitors;
         $register->namePeople = $this->namePeople;
         $register->nameVisitors = $this->nameVisitors;
+
+        $register->totBaptism = $this->totBaptism;
+        $register->nameBaptism = $this->nameBaptism;
+
+        $register->totConversions = $this->totConversions;
+        $register->nameConversions = $this->nameConversions;
         $register->obs = $this->obs;
 
         $register->save();

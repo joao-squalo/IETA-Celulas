@@ -46,6 +46,7 @@
                             <span class="text-red-900">{{ $message }}</span>
                         @enderror
                     </div>
+
                     <div class="mb-5 mx-5 w-full">
                         <label for="totPeople" class="block mb-2 text-sm font-medium text-white">Quantas Pessoas
                             Presentes?</label>
@@ -66,6 +67,7 @@
                             <span class="text-red-900">{{ $message }}</span>
                         @enderror
                     </div>
+
                     <div class="mb-5 mx-5 w-full">
                         <label for="totVisitors" class="block mb-2 text-sm font-medium text-white">Quantas Visitantes
                             Presentes?</label>
@@ -85,6 +87,43 @@
                             <span class="text-red-900">{{ $message }}</span>
                         @enderror
                     </div>
+
+                    <div class="mb-5 mx-5 w-full">
+                        <label for="totBaptism" class="block mb-2 text-sm font-medium text-white">Quantos Batismos com o Espírito Santo?</label>
+                        <input type="text" name="totBaptism"
+                            class="number bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 "
+                            required />
+                        @error('totBaptism')
+                            <span class="text-red-900">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="mb-5 mx-5 w-full">
+                        <label for="nameBaptism" class="block mb-2 text-sm font-medium text-white">Nomes dos Batizados</label>
+                        <textarea rows="10" name="nameBaptism"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 "></textarea>
+                        @error('nameBaptism')
+                            <span class="text-red-900">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-5 mx-5 w-full">
+                        <label for="totConversions" class="block mb-2 text-sm font-medium text-white">Quantas Conversões?</label>
+                        <input type="text" name="totConversions"
+                            class="number bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 "
+                            required />
+                        @error('totConversions')
+                            <span class="text-red-900">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="mb-5 mx-5 w-full">
+                        <label for="nameConversions" class="block mb-2 text-sm font-medium text-white">Nomes dos Convertidos</label>
+                        <textarea rows="10" name="nameConversions"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 "></textarea>
+                        @error('nameConversions')
+                            <span class="text-red-900">{{ $message }}</span>
+                        @enderror
+                    </div>
+
                     <div class="mb-5 mx-5 w-full">
                         <label for="offer" class="block mb-2 text-sm font-medium text-white">Valor arrecadado de
                             Oferta</label>

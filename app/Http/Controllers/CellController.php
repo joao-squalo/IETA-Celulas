@@ -27,6 +27,10 @@ class CellController extends Controller
             "namePeople" =>  $request->namePeople,
             "totVisitors" =>  $request->totVisitors,
             "nameVisitors" =>  $request->nameVisitors,
+            "totBaptism" =>  $request->totBaptism,
+            "nameBaptism" =>  $request->nameBaptism,
+            "totConversions" =>  $request->totConversions,
+            "nameConversions" =>  $request->nameConversions,
             "obs" =>  $request->obs,
         ]);
 
@@ -39,6 +43,6 @@ class CellController extends Controller
         $register->save();
 
 
-        return redirect()->route('cells.register', $request->cellID)->with('success', 'Célula cadastrada com sucesso!');
+        return redirect()->route('cells.register', $request->cellID)->with('success', 'Registro cadastrado com sucesso!');
     }
 }

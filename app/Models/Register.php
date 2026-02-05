@@ -8,7 +8,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Register extends Model
 {
     use SoftDeletes;
-    protected $fillable = ['cell_date', 'totPeople', 'namePeople', 'totVisitors', 'nameVisitors', 'offer', 'obs'];
+    protected $fillable = [
+        'cell_date', 
+        'totPeople', 
+        'namePeople', 
+        'totVisitors', 
+        'nameVisitors', 
+        'offer', 
+        'obs',
+        'totBaptism', 
+        'nameBaptism',
+        'totConversions', 
+        'nameConversions'];
 
     protected $casts = [
         'cell_date' => 'date',

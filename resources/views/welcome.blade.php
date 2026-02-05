@@ -27,7 +27,7 @@
         class="flex items-center justify-center w-full transition-opacity opacity-100 duration-750 grow starting:opacity-0">
         <main class="flex flex-col justify-center max-w-[500px] w-full">
             <img src="{{ asset('logo.png') }}" />
-            <p class="text-center font-bold text-3xl mt-4">Sistema de Células</p>
+            <p class="text-center text-white font-bold text-3xl mt-4">Sistema de Células</p>
         </main>
     </div>
     <footer class="text-white text-center">

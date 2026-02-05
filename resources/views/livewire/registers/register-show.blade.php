@@ -18,6 +18,7 @@
                             <span class="text-red-900">{{ $message }}</span>
                         @enderror
                     </div>
+
                     <div class="mb-5 w-full">
                         <label for="name" class="block mb-2 text-sm font-medium text-white">Quantas Pessoas
                             Presentes?</label>
@@ -38,6 +39,7 @@
                             <span class="text-red-900">{{ $message }}</span>
                         @enderror
                     </div>
+
                     <div class="mb-5 w-full">
                         <label for="name" class="block mb-2 text-sm font-medium text-white">Quantos Visitantes
                             Presentes?</label>
@@ -56,6 +58,41 @@
                             <span class="text-red-900">{{ $message }}</span>
                         @enderror
                     </div>
+
+                    <div class="mb-5 w-full">
+                        <label for="name" class="block mb-2 text-sm font-medium text-white">Quantos Batismos com o Espírito Santo?</label>
+                        <input required wire:model.live="totBaptism" type="text" id="name"
+                            class="number bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 " />
+                        @error('name')
+                            <span class="text-red-900">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="mb-5 w-full">
+                        <label for="name" class="block mb-2 text-sm font-medium text-white">Nomes dos Batizados com o Espírito Santo</label>
+                        <textarea rows="10" wire:model.live="nameBaptism" type="text" id="name"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 "></textarea>
+                        @error('name')
+                            <span class="text-red-900">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-5 w-full">
+                        <label for="name" class="block mb-2 text-sm font-medium text-white">Quantas Conversões?</label>
+                        <input required wire:model.live="totConversions" type="text" id="name"
+                            class="number bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 " />
+                        @error('name')
+                            <span class="text-red-900">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="mb-5 w-full">
+                        <label for="name" class="block mb-2 text-sm font-medium text-white">Nomes dos Convertidos</label>
+                        <textarea rows="10" wire:model.live="nameConversions" type="text" id="name"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 "></textarea>
+                        @error('name')
+                            <span class="text-red-900">{{ $message }}</span>
+                        @enderror
+                    </div>
+
                     <div class="mb-5 w-full">
                         <label for="name" class="block mb-2 text-sm font-medium text-white">Valor Arrecadado de
                             Ofertas</label>
@@ -77,7 +114,8 @@
                 <div class="w-100 m-auto mt-10 flex flex-col justify-between">
                     <button type="submit"
                         class="text-white bg-green-700 cursor-pointer transition duration-300 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Salvar</button>
-                    <button type="button" wire:click="delete" onclick="return confirm('Tem certeza que deseja excluir?')"
+                    <button type="button" wire:click="delete"
+                        onclick="return confirm('Tem certeza que deseja excluir?')"
                         class="mt-5 text-white bg-red-700 cursor-pointer transition duration-300 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Excluir</button>
 
                 </div>
